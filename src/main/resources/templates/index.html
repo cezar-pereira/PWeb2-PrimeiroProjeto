@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layout">
+<meta charset="UTF-8" />
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Cadastrar usuario</title>
+</head>
+
+<body>
+    <div class="container" style="margin-top: 5%;">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 card shadow p-3 mb-5 bg-white rounded">
+                <form id="formRegister" style="margin: 3%" method="POST" action="register_student" name="formRegister">
+                    <div class="form-group"> <label for="textNome" class="control-label">Nome</label> <input
+                            id="inputName" name="inputName" class="form-control" placeholder="Digite seu Nome"
+                            onkeyup="validatorRegister()" type="text">
+                        <span id="spanInputName"></span>
+                    </div>
+                    <div class="form-group"> <label for="inputEmail" class="control-label">Email</label> <input
+                            id="inputEmail" name="inputEmail" class="form-control" placeholder="Digite seu E-mail"
+                            onkeyup="validatorRegister()" type="email">
+                        <span id="spanInputEmail"></span>
+                    </div>
+                    <div class="form-group"> <label for="texCpf" class="control-label">CPF</label> <input id="inputCpf" name="inputCpf"
+                            class="form-control" placeholder="Digite seu CPF" onkeyup="validatorRegister()" type="text">
+                        <span id="spanInputCpf"></span>
+                    </div>
+                    <div class="form-group row col-md-4">
+                        <label for="inputGender">Sexo</label>
+                        <select id="inputGender" name="inputGender" class="form-control">
+                            <option selected>Masculino</option>
+                            <option>Feminino</option>
+                        </select>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-2 pt-0">Módulo</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="selectModule" id="module1"
+                                        value="Primeiro" checked>
+                                    <label class="form-check-label" for="moduleRadio1">
+                                        Primeiro
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="selectModule" id="module2"
+                                        value="Segundo">
+                                    <label class="form-check-label" for="moduleRadio2">
+                                        Segundo
+                                    </label>
+                                </div>
+                                <div class="form-check disabled">
+                                    <input class="form-check-input" type="radio" name="selectModule" id="module3"
+                                        value="Terceiro">
+                                    <label class="form-check-label" for="moduleRadio3">
+                                        Terceiro
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <label for="inputEmail" class="control-label"><b>Áreas de atuação preferidas:</b></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" onclick="validatorRegister()" id="area1"
+                                value="Programação" name="areaActing">
+                            <label class="form-check-label" for="area1">Programação</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" onclick="validatorRegister()" id="area2"
+                                value="Redes de computadores" name="areaActing">
+                            <label class="form-check-label" for="area2">Redes de computadores</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" onclick="validatorRegister()" id="area3"
+                                value="Manutenção de computadores" name="areaActing">
+                            <label class="form-check-label" for="area3">Manutenção de computadores</label>
+                        </div>
+                        <span id="spanAreaActing"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword" class="control-label">Senha</label>
+                        <input onkeyup="validatorRegister()" type="password" class="form-control" id="inputPassword" name="inputPassword"
+                            placeholder="Digite sua Senha...">
+                        <span id="spanInputPassword"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputConfirm" class="control-label">Confirme a Senha</label>
+                        <input onkeyup="validatorRegister()" type="password" class="form-control"
+                            id="inputConfirmPassword" placeholder="Confirme sua Senha...">
+                        <span id="spanInputPasswordConfirm"></span>
+                    </div>
+                    <div class="form-group" style="margin-top: 5%"> <button type="button" onclick="sendForm()"
+                            class="btn btn-primary" id="btnSubmit">Cadastrar</button></div>
+                </form>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="../js/validator.js"></script>
+</body>
+
+</html>
