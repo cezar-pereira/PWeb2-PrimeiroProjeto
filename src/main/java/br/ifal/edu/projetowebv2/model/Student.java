@@ -1,15 +1,32 @@
 package br.ifal.edu.projetowebv2.model;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-class Student {
-    String name;
-    String email;
-    String cpf;
-    String password;
-    String gender;
-    String module;
-    List<String> areaActings;
+@Entity
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private String name;
+    private String email;
+    private String cpf;
+    private String password;
+    private String sex;
+    private String module;
+    private String[] areas;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -43,14 +60,6 @@ class Student {
         this.password = password;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public String getModule() {
         return module;
     }
@@ -59,11 +68,25 @@ class Student {
         this.module = module;
     }
 
-    public List<String> getAreaActings() {
-        return areaActings;
+    public String getAreas() {
+        String areasString = "";
+        for (String area : this.areas) {
+            areasString += area + "; ";
+        }
+        areasString = areasString.substring(0, areasString.length() - 2);
+        return areasString;
     }
 
-    public void setAreaActings(List<String> areaActings) {
-        this.areaActings = areaActings;
+    public void setAreas(String[] areas) {
+        this.areas = areas;
     }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
 }

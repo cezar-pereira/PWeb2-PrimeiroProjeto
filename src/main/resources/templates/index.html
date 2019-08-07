@@ -16,76 +16,67 @@
 </head>
 
 <body>
-    <div class="container" style="margin-top: 5%;">
+    <div class="container" style="margin-top: 3%;">
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 card shadow p-3 mb-5 bg-white rounded">
-                <form id="formRegister" style="margin: 3%" method="POST" action="register_student" name="formRegister">
+                <span th:text="${erroRegister}"></span>
+
+                <form id="formRegister" style="margin: 3%" method="POST" action="register_update_student" name="formRegister">
                     <div class="form-group"> <label for="textNome" class="control-label">Nome</label> <input
-                            id="inputName" name="inputName" class="form-control" placeholder="Digite seu Nome"
-                            onkeyup="validatorRegister()" type="text">
+                            id="inputName" name="name" class="form-control" placeholder="Digite seu Nome"
+                            onfocusout="validatorRegister()" type="text">
                         <span id="spanInputName"></span>
                     </div>
                     <div class="form-group"> <label for="inputEmail" class="control-label">Email</label> <input
-                            id="inputEmail" name="inputEmail" class="form-control" placeholder="Digite seu E-mail"
-                            onkeyup="validatorRegister()" type="email">
+                            id="inputEmail" name="email" class="form-control" placeholder="Digite seu E-mail"
+                            onfocusout="validatorRegister()" type="email">
                         <span id="spanInputEmail"></span>
                     </div>
-                    <div class="form-group"> <label for="texCpf" class="control-label">CPF</label> <input id="inputCpf" name="inputCpf"
-                            class="form-control" placeholder="Digite seu CPF" onkeyup="validatorRegister()" type="text">
+                    <div class="form-group"> <label for="texCpf" class="control-label">CPF</label> <input id="inputCpf"
+                            name="cpf" class="form-control" placeholder="Digite seu CPF"
+                            onfocusout="validatorRegister()" type="text">
                         <span id="spanInputCpf"></span>
                     </div>
-                    <div class="form-group row col-md-4">
-                        <label for="inputGender">Sexo</label>
-                        <select id="inputGender" name="inputGender" class="form-control">
-                            <option selected>Masculino</option>
-                            <option>Feminino</option>
-                        </select>
-                    </div>
-                    <fieldset class="form-group">
-                        <div class="row">
-                            <legend class="col-form-label col-sm-2 pt-0">Módulo</legend>
-                            <div class="col-sm-10">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="selectModule" id="module1"
-                                        value="Primeiro" checked>
-                                    <label class="form-check-label" for="moduleRadio1">
-                                        Primeiro
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="selectModule" id="module2"
-                                        value="Segundo">
-                                    <label class="form-check-label" for="moduleRadio2">
-                                        Segundo
-                                    </label>
-                                </div>
-                                <div class="form-check disabled">
-                                    <input class="form-check-input" type="radio" name="selectModule" id="module3"
-                                        value="Terceiro">
-                                    <label class="form-check-label" for="moduleRadio3">
-                                        Terceiro
-                                    </label>
-                                </div>
-                            </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <label for="inputGender">Sexo</label>
+                            <select id="inputGender" name="sex" class="form-control">
+                                <option selected>Masculino</option>
+                                <option>Feminino</option>
+                            </select>
 
                         </div>
-                    </fieldset>
-                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label for="inputModule">Módulo</label>
+                            <select id="inputModule" name="module" class="form-control">
+                                <option selected>Primeiro</option>
+                                <option>Segundo</option>
+                                <option>Terceiro</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group" style="margin-top: 3%">
                         <label for="inputEmail" class="control-label"><b>Áreas de atuação preferidas:</b></label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" onclick="validatorRegister()" id="area1"
-                                value="Programação" name="areaActing">
+                                value="Programação" name="areas">
                             <label class="form-check-label" for="area1">Programação</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" onclick="validatorRegister()" id="area2"
-                                value="Redes de computadores" name="areaActing">
+                                value="Redes de computadores" name="areas">
                             <label class="form-check-label" for="area2">Redes de computadores</label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" onclick="validatorRegister()" id="area3"
-                                value="Manutenção de computadores" name="areaActing">
+                                value="Manutenção de computadores" name="areas">
                             <label class="form-check-label" for="area3">Manutenção de computadores</label>
                         </div>
                         <span id="spanAreaActing"></span>
@@ -93,8 +84,8 @@
 
                     <div class="form-group">
                         <label for="inputPassword" class="control-label">Senha</label>
-                        <input onkeyup="validatorRegister()" type="password" class="form-control" id="inputPassword" name="inputPassword"
-                            placeholder="Digite sua Senha...">
+                        <input onkeyup="validatorRegister()" type="password" class="form-control" id="inputPassword"
+                            name="password" placeholder="Digite sua Senha..." />
                         <span id="spanInputPassword"></span>
                     </div>
                     <div class="form-group">
@@ -104,10 +95,14 @@
                         <span id="spanInputPasswordConfirm"></span>
                     </div>
                     <div class="form-group" style="margin-top: 5%"> <button type="button" onclick="sendForm()"
-                            class="btn btn-primary" id="btnSubmit">Cadastrar</button></div>
+                            class="btn btn-primary" id="btnSubmit" disabled>Cadastrar</button></div>
                 </form>
             </div>
-            <div class="col-2"></div>
+            <div class="col-2">
+                <a href="/registers" class="btn btn-primary" style="margin-top: 3%; margin-bottom: 3%">
+                    <h6>Lista de alunos</h6>
+                </a>
+            </div>
         </div>
     </div>
 

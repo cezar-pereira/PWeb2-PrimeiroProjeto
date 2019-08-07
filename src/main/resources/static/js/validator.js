@@ -1,25 +1,28 @@
 let btnSubmit = document.getElementById('btnSubmit');
 function sendForm() {
-    if (validatorRegister())
+    if (validatorRegister()) {
+        console.log("pode enviar form")
         document.formRegister.submit();
-
+    } else {
+        console.log("nao pode enviar")
+    }
 }
 
 function validatorRegister() {
     if (validateName()) {
-        if (validateEmail()) {
-            if (validadeCpf()) {
-                if (validateAreaActing()) {
+        if (validateEmail())
+            if (validadeCpf())
+                if (validateAreaActing())
                     if (validatePassword()) {
                         btnSubmit.disabled = false;
+                        return true;
                     } else {
                         btnSubmit.disabled = true;
                     }
-                }
-            }
-        }
-        return true;
+    } else {
+        return false;
     }
+    return false;
 }
 
 function validateName() {
@@ -99,7 +102,7 @@ function validadeCpf() {
 
 function validateAreaActing() {
     console.log('chamou area');
-    let areaActing = document.getElementsByName("areaActing");
+    let areaActing = document.getElementsByName("areas");
 
     for (let i = 0; i < areaActing.length; i++) {
         if (areaActing[i].checked) {
