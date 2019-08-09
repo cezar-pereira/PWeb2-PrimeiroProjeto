@@ -20,9 +20,14 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8 card shadow p-3 mb-5 bg-white rounded">
-                <span th:text="${erroRegister}"></span>
+                <div class="row">
+                    <div class="col-md-auto">
+                        <p class="alert-danger fontAlertRegisters" th:text="${messageError}"></p>
+                    </div>
+                </div>
 
-                <form id="formRegister" style="margin: 3%" method="POST" action="register_update_student" name="formRegister">
+                <form id="formRegister" style="margin: 3%" method="POST" action="register_update_student"
+                    name="formRegister">
                     <div class="form-group"> <label for="textNome" class="control-label">Nome</label> <input
                             id="inputName" name="name" class="form-control" placeholder="Digite seu Nome"
                             onfocusout="validatorRegister()" type="text">
@@ -95,7 +100,7 @@
                         <span id="spanInputPasswordConfirm"></span>
                     </div>
                     <div class="form-group" style="margin-top: 5%"> <button type="button" onclick="sendForm()"
-                            class="btn btn-primary" id="btnSubmit" disabled>Cadastrar</button></div>
+                            class="btn btn-primary" id="btnSubmit">Cadastrar</button></div>
                 </form>
             </div>
             <div class="col-2">

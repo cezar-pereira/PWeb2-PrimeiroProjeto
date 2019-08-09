@@ -1,11 +1,7 @@
 let btnSubmit = document.getElementById('btnSubmit');
 function sendForm() {
-    if (validatorRegister()) {
-        console.log("pode enviar form")
+    //if (validatorRegister())
         document.formRegister.submit();
-    } else {
-        console.log("nao pode enviar")
-    }
 }
 
 function validatorRegister() {
@@ -98,6 +94,10 @@ function validadeCpf() {
         spanInputCpf.innerHTML = '';
         return false;
     }
+}
+
+function validateSex(){
+    
 }
 
 function validateAreaActing() {

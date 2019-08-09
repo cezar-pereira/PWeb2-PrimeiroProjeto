@@ -20,8 +20,6 @@ $(document).ready(function () {
                 areaActing[1].checked = true;
             if (student.areas.includes("Manutenção de computadores"))
                 areaActing[2].checked = true;
-
-
         });
     });
 });

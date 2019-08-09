@@ -31,35 +31,25 @@ public class ControllerRegister {
     @RequestMapping(value = "register_update_student", method = RequestMethod.POST)
     public ModelAndView registerStudent(Student student, RedirectAttributes redirect) {
 
-        // quando eu faço verificacoes de campo usando o objeto da o erro 500
+        ModelAndView pageRedirect = new ModelAndView("redirect:/registers");
 
-        // return new ModelAndView("redirect:/registers");
-        // if (validateName(student.getName())) {
-        // studentRepo.save(student);
-        // return new ModelAndView("redirect:/registers");
-        // } else {
-        // return new ModelAndView("redirect:/registers");
-        // }
-
-        // if (validatorRegister(student)) {
-        // studentRepo.save(student);
-        // return new ModelAndView("redirect:/registers");
-        // } else {
-        // return new ModelAndView("index");
-        // }
-
-        if (student.getId() == 0) {
-            redirect.addFlashAttribute("messageSucess", "Estudante cadastrado com sucesso!");
-            studentRepo.save(student);
-        } else {
+        if (validatorRegister(student)) {
             if (checkPresenceStudent(student.getId())) {
-                redirect.addFlashAttribute("messageSucess", "Estudante atualizado com sucesso!");
                 studentRepo.save(student);
-            } else
+                redirect.addFlashAttribute("messageSucess", "Estudante atualizado com sucesso!");
+            } else {
+                studentRepo.save(student);
+                redirect.addFlashAttribute("messageSucess", "Estudante cadastrado com sucesso!");
+            }
+        } else {
+            if (checkPresenceStudent(student.getId()))
                 redirect.addFlashAttribute("messageError", "Erro ao atualizar estudante!");
+            else {
+                pageRedirect = new ModelAndView("redirect:/");
+                redirect.addFlashAttribute("messageError", "Erro ao cadastrar estudante!");
+            }
         }
-
-        return new ModelAndView("redirect:/registers");
+        return pageRedirect;
     }
 
     @RequestMapping("/registers")
@@ -108,44 +98,53 @@ public class ControllerRegister {
                 if (validadeCpf(student.getCpf()))
                     if (validadeSex(student.getSex()))
                         if (validadeAreaActing(student.getAreas()))
-                            if (validadePassword(student.getPassword())) {
+                            if (validadePassword(student.getPassword()))
                                 return true;
-                            }
+
         }
         return false;
     }
 
-    boolean validateName(String name) {
-        if (name.length() > 2)
+    public boolean validateName(String name) {
+        if (name.length() >= 2) {
             return true;
-        return false;
+        } else {
+            return false;
+        }
     }
 
-    boolean validateEmail(String email) {
+    public boolean validateEmail(String email) {
         if (email.contains("@") && email.contains(".") && email.length() > 7)
             return true;
         return false;
     }
 
-    boolean validadeCpf(String cpf) {
-        if (cpf.length() != 11)
+    public boolean validadeCpf(String cpf) {
+        try {
+            if (cpf.length() == 11) {
+                Double.valueOf(cpf);
+                return true;
+            } else
+                return false;
+        } catch (Exception e) {
             return false;
-        return true;
+        }
     }
 
-    boolean validadeSex(String sex) {
+    public boolean validadeSex(String sex) {
         if (sex.equalsIgnoreCase("masculino") || sex.equalsIgnoreCase("feminino"))
             return true;
         return false;
     }
 
-    boolean validadeAreaActing(String areaActing) {
-        if (areaActing.isEmpty())
-            return false;
-        return true;
+    public boolean validadeAreaActing(String areaActing) {
+        if (areaActing.contains("Programação") || areaActing.contains("Redes de computadores")
+                || areaActing.contains("Manutenção de computadores"))
+            return true;
+        return false;
     }
 
-    boolean validadePassword(String password) {
+    public boolean validadePassword(String password) {
         if (password.length() < 6)
             return false;
         return true;
