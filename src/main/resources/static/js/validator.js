@@ -1,6 +1,6 @@
 let btnSubmit = document.getElementById('btnSubmit');
 function sendForm() {
-    //if (validatorRegister())
+    if (validatorRegister())
         document.formRegister.submit();
 }
 
@@ -96,8 +96,8 @@ function validadeCpf() {
     }
 }
 
-function validateSex(){
-    
+function validateSex() {
+
 }
 
 function validateAreaActing() {

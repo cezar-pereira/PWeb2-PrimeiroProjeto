@@ -53,10 +53,22 @@ public class ControllerRegister {
     }
 
     @RequestMapping("/registers")
-    public ModelAndView listStudent(Model model, Pageable pageable) {
+    public ModelAndView listStudent() {
         ModelAndView response = new ModelAndView("registers.html");
 
         Iterable<Student> students = studentRepo.findAll();
+
+        response.addObject("students", students);
+
+        return response;
+    }
+
+    @RequestMapping("/search_registers")
+    public ModelAndView listStudent(String searchRegisters) {
+        System.out.println(searchRegisters);
+        ModelAndView response = new ModelAndView("registers.html");
+
+        Iterable<Student> students = studentRepo.findByNameContaining(searchRegisters);
 
         response.addObject("students", students);
 
